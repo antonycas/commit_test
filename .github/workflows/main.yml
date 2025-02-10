@@ -28,7 +28,7 @@ jobs:
 
       - name: Commit changes
         run: echo "It was updated"
-        if: ${{ steps.set-commit-variable.outputs.needs-commit == "true" }}
+        if: ${{ steps.set-commit-variable.outputs.needs-commit }} == "true"
 
 
       # - name: List git status
