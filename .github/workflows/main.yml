@@ -20,12 +20,13 @@ jobs:
         id: set-commit-variable
         run: |
           status=$(git status -s)
-          result=$(echo "$status" | grep 'ai/cache/test.txt')
-          if "$result" == ""; then
-            echo "needs-commit='false'" >> $GITHUB_OUTPUT
-          else
+          file="ai/cache/test.txt"
+          if grep -q "$file" <<< "$status"; then
             echo "needs-commit='true'" >> $GITHUB_OUTPUT
-          fi 
+          else
+            echo "needs-commit='false'" >> $GITHUB_OUTPUT
+          fi
+          echo "$status"
 
       - name: Commit changes
         run: echo "It was updated"
