@@ -29,7 +29,12 @@ jobs:
           echo "$status"
 
       - name: Commit changes
-        run: echo "It was updated"
+        uses: EndBug/add-and-commit@v9
+        with:
+          author_name: "Antony Castineiras"
+          author_email: "antony@cas.com"
+          message: "Auto Commit via Worfklow"
+          add: "ai/cache/test.txt"
         if: ${{ steps.set-commit-variable.outputs.needs-commit }} == "true"
 
 
