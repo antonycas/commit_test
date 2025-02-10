@@ -2,7 +2,7 @@ name: Test Commit
 on:
   push:
     branches:
-      - main
+      - master
 jobs:
   commit:
     runs-on: ubuntu-22.04
