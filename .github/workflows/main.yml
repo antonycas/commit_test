@@ -1,0 +1,14 @@
+name: Test Commit
+on:
+  push:
+    branches:
+      - main
+jobs:
+  commit:
+    runs-on: ubuntu-22.04
+    steps: 
+      - name: Create file
+        run: touch test.txt
+
+      - name: List git status
+        run: git status
