@@ -14,7 +14,7 @@ jobs:
         run: touch ai/cache/test.txt
 
       - name: Display Status
-        run: echo git status -s
+        run: git status -s
 
       - name: Display if updated
         run: |
