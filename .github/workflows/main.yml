@@ -16,15 +16,20 @@ jobs:
       - name: Display Status
         run: git status -s
 
-      - name: Display if updated
+      - name: Set Commit Variable
+        id: set-commit-variable
         run: |
           result=$(git status -s | grep 'ai/cache/test.txt')
           if "$result" == ""; then
-            echo "It wasnt updated"
+            echo "needs-commit=false" >> $GITHUB_OUTPUT
           else
-            echo "It was upadated"
-            echo "RESULT: $result"
+            echo "needs-commit=true" >> $GITHUB_OUTPUT
           fi 
+
+      - name: Commit changes
+        run: echo "It was updated"
+        if: ${{ steps.set-commit-variable.outputs.needs-commit == "true" }}
+
 
       # - name: List git status
       #   id: list-git-status
