@@ -13,6 +13,9 @@ jobs:
       - name: Create file
         run: touch ai/cache/test.txt
 
+      - name: Display Status
+        run: echo git status -s
+
       - name: Display if updated
         run: |
           git status -s | grep ai/cache/test.txt
