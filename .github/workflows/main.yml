@@ -19,12 +19,13 @@ jobs:
       - name: Display if updated
         run: |
           git status -s | grep 'ai/cache/test.txt'
-          result=$?
-          if "$result" == "0"; then
-            echo "It was updated"
-          else
-            echo "It wasnt upadated"
-          fi 
+          RESULT=$(echo $?)
+          echo "$RESULT"
+          # if "$result" == "0"; then
+          #   echo "It was updated"
+          # else
+          #   echo "It wasnt upadated"
+          # fi 
 
       # - name: List git status
       #   id: list-git-status
