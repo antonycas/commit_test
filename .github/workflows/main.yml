@@ -19,7 +19,7 @@ jobs:
 
       - name: test file updated
         run: echo "Test file updated"
-        # if: 'ai/cache/test.txt' in ${{ steps.list-git-status.outputs.git-status }}
+        if: ${{ 'ai/cache/test.txt' in  steps.list-git-status.outputs.git-status }}
 
       # - name: test file not updated
       #   run: echo "Test file updated"
