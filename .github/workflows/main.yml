@@ -13,13 +13,22 @@ jobs:
       - name: Create file
         run: touch ai/cache/test.txt
 
-      - name: List git status
-        id: list-git-status
-        run: GIT_STATUS=$(git status -s ai/cache) && echo "git-status=$GIT_STATUS" >> $GITHUB_OUTPUT
+      - name: Display if updated
+        run: |
+          git status -s | grep ai/cache/test.txt
+          if $? == '0'; then
+            echo "It was updated"
+          else
+            echo "It wasnt upadated"
+          fi 
 
-      - name: test file updated
-        run: echo "Test file updated"
-        if: ${{ 'ai/cache/test.txt' in  steps.list-git-status.outputs.git-status }}
+      # - name: List git status
+      #   id: list-git-status
+      #   run: GIT_STATUS=$(git status -s ai/cache) && echo "git-status=$GIT_STATUS" >> $GITHUB_OUTPUT
+
+      # - name: test file updated
+      #   run: echo "Test file updated"
+      #   if: ${{ 'ai/cache/test.txt' in  steps.list-git-status.outputs.git-status }}
 
       # - name: test file not updated
       #   run: echo "Test file updated"
