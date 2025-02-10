@@ -17,9 +17,9 @@ jobs:
         id: list-git-status
         run: GIT_STATUS=$(git status -s ai/cache) && echo "git-status=$GIT_STATUS" >> $GITHUB_OUTPUT
 
-      # - name: test file updated
-      #   run: echo "Test file updated"
-      #   if: 'ai/cache/test.txt' in ${{ steps.list-git-status.outputs.git-status }}
+      - name: test file updated
+        run: echo "Test file updated"
+        if: 'ai/cache/test.txt' in ${{ steps.list-git-status.outputs.git-status }}
 
       # - name: test file not updated
       #   run: echo "Test file updated"
