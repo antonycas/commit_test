@@ -23,6 +23,7 @@ jobs:
             echo "It wasnt updated"
           else
             echo "It was upadated"
+            echo "RESULT: $RESULT"
           fi 
 
       # - name: List git status
