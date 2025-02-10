@@ -21,9 +21,9 @@ jobs:
         run: |
           result=$(git status -s | grep 'ai/cache/test.txt')
           if "$result" == ""; then
-            echo "needs-commit=false" >> $GITHUB_OUTPUT
+            echo "needs-commit='false'" >> $GITHUB_OUTPUT
           else
-            echo "needs-commit=true" >> $GITHUB_OUTPUT
+            echo "needs-commit='true'" >> $GITHUB_OUTPUT
           fi 
 
       - name: Commit changes
