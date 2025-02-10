@@ -19,7 +19,8 @@ jobs:
       - name: Set Commit Variable
         id: set-commit-variable
         run: |
-          result=$(git status -s | grep 'ai/cache/test.txt')
+          status=$(git status -s)
+          result=(echo "$STATUS" | grep 'ai/cache/test.txt')
           if "$result" == ""; then
             echo "needs-commit='false'" >> $GITHUB_OUTPUT
           else
