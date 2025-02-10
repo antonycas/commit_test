@@ -9,9 +9,9 @@ jobs:
     steps:
       - name: checkout code
         uses: actions/checkout@v4
-        
+
       - name: Create file
-        run: touch test.txt
+        run: touch ai/cache/test.txt
 
       - name: List git status
-        run: git status
+        run: git status ai/cache
