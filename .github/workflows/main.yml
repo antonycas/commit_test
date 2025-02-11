@@ -2,23 +2,8 @@ name: Test Commit
 on: ['push']
 jobs:
   commit:
-    runs-on: ubuntu-22.04
-
-    permissions:
-      contents: write
-
-    steps:
-      - name: checkout code
-        uses: actions/checkout@v4
-
-      - name: Create file
-        run: touch ai/cache/branch_test.txt
-
-      - name: Display Status
-        run: git status -s
-
-      - name: Commit
-        uses: ./github/workflows/commit.yml
+    runs-on: ubuntu-22.04  
+    uses: ./github/workflows/commit.yml
         strategy:
           matrix:
             version: ["2.1", "2.2", "2.3"]
@@ -26,6 +11,19 @@ jobs:
         with:
           version: "${{ matrix.version }}"
           path: "${{ matrix.path  }}"
+
+    # steps:
+    #   - name: checkout code
+    #     uses: actions/checkout@v4
+
+    #   - name: Create file
+    #     run: touch ai/cache/branch_test.txt
+
+    #   - name: Display Status
+    #     run: git status -s
+
+    #   - name: Commit
+        
 
       # - name: Set Commit Variable
       #   id: set-commit-variable

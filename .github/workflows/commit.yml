@@ -10,7 +10,12 @@ on:
 
 jobs:
   commit:
+    permissions:
+      contents: write
     steps:
+      - name: checkout code
+        uses: actions/checkout@v4
+
       - name: Create File
         run: touch "${{ inputs.path }}${{ inputs.version }}_test.txt"
 
