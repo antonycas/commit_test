@@ -7,7 +7,7 @@ jobs:
       matrix:
         version: ["2", "3", "4"]
         path: ["ai/cache/"]
-    uses: ./github/workflows/commit.yml
+    uses: ./github/workflows/commit-flow.yml
     with:
       version: "${{ matrix.version }}"
       path: "${{ matrix.path }}"
