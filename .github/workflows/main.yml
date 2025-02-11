@@ -2,7 +2,9 @@ name: Test Commit
 on: ['push']
 jobs:
   commit:
-    name: commit 
+    name: commit
+    permissions:
+      contents: write 
     strategy:
       matrix:
         version: ["2", "3", "4"]
