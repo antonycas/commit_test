@@ -39,7 +39,7 @@ jobs:
           git add ai/cache/test.txt
           git commit -m "${{ env.COMMIT_MESSAGE }}"
           git push
-        if: "${{ steps.set-commit-variable.outputs.needs-commit }}" == "true"
+        # if: "${{ steps.set-commit-variable.outputs.needs-commit }}" == "true"
 
 
       # - name: Commit changes
