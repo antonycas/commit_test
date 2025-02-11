@@ -36,6 +36,7 @@ jobs:
           if "$needs_commit" == "true"; then
             git config --global user.name "${{ env.COMMIT_AUTHOR }}"
             git config --global user.email "antonycas@users.noreply.github.com"
+            git pull
             git add "$file"
             git commit -m "${{ env.COMMIT_MESSAGE }}"
             git push
