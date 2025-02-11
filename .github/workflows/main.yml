@@ -1,8 +1,5 @@
 name: Test Commit
-on:
-  push:
-    branches:
-      - master
+on: ['push']
 jobs:
   commit:
     runs-on: ubuntu-22.04
