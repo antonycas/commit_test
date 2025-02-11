@@ -41,7 +41,7 @@ jobs:
           if grep -q "$file" <<< "$status"; then
             NEEDS-COMMIT="true"
           else
-            NEEDS-COMMIT="false" >> $GITHUB_OUTPUT
+            NEEDS-COMMIT="false"
           fi
 
           if "$NEEDS-COMMIT" == "true"; then
