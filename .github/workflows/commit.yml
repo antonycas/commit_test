@@ -1,0 +1,40 @@
+on:
+  workflow_call:
+    inputs:
+      version:
+        type: string
+        required: true
+      path:
+        type: string
+        required: true
+
+jobs:
+  commit:
+    steps:
+      - name: Create File
+        run: touch "${{ inputs.path }}${{ inputs.version }}_test.txt"
+
+      - name: Commit changes
+        id: commit-changes
+        env:
+          COMMIT_MESSAGE: Automatic Commit via Workflows
+          COMMIT_AUTHOR: antonycas
+        run: |
+          status=$(git status -s)
+          file="${{ inputs.path }}${{ inputs.version }}_test.txt"
+          
+          if grep -q "$file" <<< "$status"; then
+            needs_commit="true"
+          else
+            needs_commit="false"
+          fi
+
+          if "$needs_commit" == "true"; then
+            git config --global user.name "${{ env.COMMIT_AUTHOR }}"
+            git config --global user.email "antonycas@users.noreply.github.com"
+            git add ai/cache/branch_test.txt
+            git commit -m "${{ env.COMMIT_MESSAGE }}"
+            git push
+          else
+            echo "No updates were made."  
+          fi
