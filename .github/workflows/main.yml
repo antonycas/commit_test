@@ -39,9 +39,9 @@ jobs:
           file="ai/cache/branch_test.txt"
           
           if grep -q "$file" <<< "$status"; then
-            NEEDS-COMMIT='true'
+            NEEDS-COMMIT=true
           else
-            NEEDS-COMMIT='false'
+            NEEDS-COMMIT=false
           fi
 
           if "$NEEDS-COMMIT" == "true"; then
