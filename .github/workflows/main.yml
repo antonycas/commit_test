@@ -6,11 +6,11 @@ jobs:
     uses: ./github/workflows/commit.yml
     strategy:
       matrix:
-        version: ["2.1", "2.2", "2.3"]
+        version: [2, 3, 4]
         path: ["ai/cache/"]
     with:
       version: "${{ matrix.version }}"
-      path: "${{ matrix.path  }}"
+      path: "${{ matrix.path }}"
 
     # steps:
     #   - name: checkout code
