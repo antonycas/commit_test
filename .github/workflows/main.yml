@@ -4,13 +4,13 @@ jobs:
   commit:
     runs-on: ubuntu-22.04  
     uses: ./github/workflows/commit.yml
-        strategy:
-          matrix:
-            version: ["2.1", "2.2", "2.3"]
-            path: ["ai/cache/"]
-        with:
-          version: "${{ matrix.version }}"
-          path: "${{ matrix.path  }}"
+    strategy:
+      matrix:
+        version: ["2.1", "2.2", "2.3"]
+        path: ["ai/cache/"]
+    with:
+      version: "${{ matrix.version }}"
+      path: "${{ matrix.path  }}"
 
     # steps:
     #   - name: checkout code
