@@ -21,8 +21,8 @@ jobs:
         uses: ./github/workflows/commit.yml
         strategy:
           matrix:
-            version: "${{ fromJson(["2.1", "2.2", "2.3"])  }}"
-            path: "${{ from Json(["ai/cache/"]) }}"
+            version: ["2.1", "2.2", "2.3"]
+            path: ["ai/cache/"]
         with:
           version: "${{ matrix.version }}"
           path: "${{ matrix.path  }}"
