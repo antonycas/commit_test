@@ -1,10 +1,11 @@
 name: Test Commit
 on: ['push']
 jobs:
-  commit: 
+  commit:
+    name: commit 
     strategy:
       matrix:
-        version: [2, 3, 4]
+        version: ["2", "3", "4"]
         path: ["ai/cache/"]
     uses: ./github/workflows/commit.yml
     with:
