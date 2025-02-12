@@ -9,8 +9,10 @@ on:
         required: true
 
 jobs:
-  commit:
+  set-update-var:
     runs-on: ubuntu-22.04
+    outputs:
+      file_changed: ${{ steps.set-update-variable }}
     steps:
       - name: checkout code
         uses: actions/checkout@v4
@@ -25,17 +27,19 @@ jobs:
           file="${{ inputs.path }}${{ inputs.version }}_test.txt"
           
           if grep -q "$file" <<< "$status"; then
-            echo "create-artifact='true'" >> $GITHUB_OUTPUT
+            echo "file_changed='true'" >> $GITHUB_OUTPUT
           else
-            echo "create-artifact='false'" >> $GITHUB_OUTPUT
+            echo "file_changed='false'" >> $GITHUB_OUTPUT
           fi
       
-      - name: Upload Artifact
-        if: "${{ steps.set-update-variable.outputs.create-artifact }}" == "true"
-        uses: actions/upload-artifact@v4
-        with:
-          name: "${{ inputs.path }}${{ inputs.version }}_test.txt"
-          path: "${{ inputs.path }}${{ inputs.version }}_test.txt"
+    upload-artifact:
+      if: "${{ steps.set-update-variable.outputs.create-artifact }}" == "true"
+      steps:
+        - name: Upload Artifact    
+          uses: actions/upload-artifact@v4
+          with:
+            name: "${{ inputs.path }}${{ inputs.version }}_test.txt"
+            path: "${{ inputs.path }}${{ inputs.version }}_test.txt"
 
       
       # - name: Commit changes
