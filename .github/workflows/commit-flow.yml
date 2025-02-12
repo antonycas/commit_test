@@ -18,28 +18,49 @@ jobs:
       - name: Create File
         run: touch "${{ inputs.path }}${{ inputs.version }}_test.txt"
 
-      - name: Commit changes
-        id: commit-changes
-        env:
-          COMMIT_MESSAGE: Automatic Commit via Workflows
-          COMMIT_AUTHOR: antonycas
+      - name: Set Update variable
+        id: set-update-variable
         run: |
           status=$(git status -s)
           file="${{ inputs.path }}${{ inputs.version }}_test.txt"
           
           if grep -q "$file" <<< "$status"; then
-            needs_commit="true"
+            echo "create-artifact='true'" >> $GITHUB_OUTPUT
           else
-            needs_commit="false"
+            echo "create-artifact='false'" >> $GITHUB_OUTPUT
           fi
+      
+      - name: Upload Artifact
+        if: "${{ steps.set-update-variable.outputs. }}" == "true"
+        uses: actions/upload-artifact@v4
+        with:
+          name: "${{ inputs.path }}${{ inputs.version }}_test.txt"
+          path: "${{ inputs.path }}${{ inputs.version }}_test.txt"
 
-          if "$needs_commit" == "true"; then
-            git config --global user.name "${{ env.COMMIT_AUTHOR }}"
-            git config --global user.email "antonycas@users.noreply.github.com"
-            git pull
-            git add "$file"
-            git commit -m "${{ env.COMMIT_MESSAGE }}"
-            git push
-          else
-            echo "No updates were made."  
-          fi
+      
+      # - name: Commit changes
+      #   id: commit-changes
+      #   env:
+      #     COMMIT_MESSAGE: Automatic Commit via Workflows
+      #     COMMIT_AUTHOR: antonycas
+      #   run: |
+      #     status=$(git status -s)
+      #     file="${{ inputs.path }}${{ inputs.version }}_test.txt"
+          
+      #     if grep -q "$file" <<< "$status"; then
+      #       needs_commit="true"
+      #     else
+      #       needs_commit="false"
+      #     fi
+
+      #     if "$needs_commit" == "true"; then
+      #       git config --global user.name "${{ env.COMMIT_AUTHOR }}"
+      #       git config --global user.email "antonycas@users.noreply.github.com"
+      #       git pull
+      #       git add "$file"
+      #       git commit -m "${{ env.COMMIT_MESSAGE }}"
+      #       git push
+      #     else
+      #       echo "No updates were made."  
+      #     fi
+
