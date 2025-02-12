@@ -31,7 +31,7 @@ jobs:
           fi
       
       - name: Upload Artifact
-        if: "${{ steps.set-update-variable.outputs. }}" == "true"
+        if: "${{ steps.set-update-variable.outputs.create-artifact }}" == "true"
         uses: actions/upload-artifact@v4
         with:
           name: "${{ inputs.path }}${{ inputs.version }}_test.txt"
