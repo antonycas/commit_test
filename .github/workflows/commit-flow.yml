@@ -32,14 +32,14 @@ jobs:
             echo "file_changed='false'" >> $GITHUB_OUTPUT
           fi
       
-    upload-artifact:
-      if: "${{ steps.set-update-variable.outputs.create-artifact }}" == "true"
-      steps:
-        - name: Upload Artifact    
-          uses: actions/upload-artifact@v4
-          with:
-            name: "${{ inputs.path }}${{ inputs.version }}_test.txt"
-            path: "${{ inputs.path }}${{ inputs.version }}_test.txt"
+  upload-artifact:
+    if: "${{ steps.set-update-variable.outputs.create-artifact }}" == "true"
+    steps:
+      - name: Upload Artifact    
+        uses: actions/upload-artifact@v4
+        with:
+          name: "${{ inputs.path }}${{ inputs.version }}_test.txt"
+          path: "${{ inputs.path }}${{ inputs.version }}_test.txt"
 
       
       # - name: Commit changes
