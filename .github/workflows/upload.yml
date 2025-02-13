@@ -36,7 +36,7 @@ jobs:
     steps:
       - name: checkout code
         uses: actions/checkout@v4
-        
+
       - name: Update File
         run: echo "Updated" >> "${{ inputs.path }}${{inputs.version}}_test.txt"
 
