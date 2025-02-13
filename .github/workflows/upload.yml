@@ -32,6 +32,7 @@ jobs:
   #           echo "file_changed='false'" >> $GITHUB_OUTPUT
   #         fi
   upload-artifact:
+    runs-on: ubuntu-22.04
     name: Upload Artifact
     steps:
       - name: checkout code

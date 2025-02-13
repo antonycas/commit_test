@@ -9,6 +9,7 @@ on:
         required: true
 jobs:
   commit:
+    runs-on: ubuntu-22.04
     steps:
       - name: checkout code
         uses: actions/checkout@v4

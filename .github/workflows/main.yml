@@ -2,7 +2,7 @@ name: Test Commit
 on: ['push']
 jobs:
   upload:
-    runs-on: Ubuntu-22.04
+    runs-on: ubuntu-22.04
     name: Upload
     permissions:
       contents: write 
@@ -16,7 +16,7 @@ jobs:
       path: "${{ matrix.path }}"
 
   commit:
-    runs-on: Ubuntu-22.04
+    runs-on: ubuntu-22.04
     name: Commit
     needs: upload
     uses: ./.github/workflows/commit.yml
