@@ -9,39 +9,43 @@ on:
         required: true
 
 jobs:
-  set-update-var:
-    runs-on: ubuntu-22.04
-    outputs:
-      file_changed: ${{ steps.set-update-variable }}
+  # set-update-var:
+  #   runs-on: ubuntu-22.04
+  #   outputs:
+  #     file_changed: ${{ steps.set-update-variable }}
+  #   steps:
+  #     - name: checkout code
+  #       uses: actions/checkout@v4
+
+  #     - name: Create File
+  #       run: touch "${{ inputs.path }}${{ inputs.version }}_test.txt"
+
+  #     - name: Set Update variable
+  #       id: set-update-variable
+  #       run: |
+  #         status=$(git status -s)
+  #         file="${{ inputs.path }}${{ inputs.version }}_test.txt"
+          
+  #         if grep -q "$file" <<< "$status"; then
+  #           echo "file_changed='true'" >> $GITHUB_OUTPUT
+  #         else
+  #           echo "file_changed='false'" >> $GITHUB_OUTPUT
+  #         fi
+  upload-artifact:
+    name: Upload Artifact
     steps:
       - name: checkout code
         uses: actions/checkout@v4
+        
+      - name: Update File
+        run: echo "Updated" >> "${{ inputs.path }}${{inputs.version}}_test.txt"
 
-      - name: Create File
-        run: touch "${{ inputs.path }}${{ inputs.version }}_test.txt"
-
-      - name: Set Update variable
-        id: set-update-variable
-        run: |
-          status=$(git status -s)
-          file="${{ inputs.path }}${{ inputs.version }}_test.txt"
-          
-          if grep -q "$file" <<< "$status"; then
-            echo "file_changed='true'" >> $GITHUB_OUTPUT
-          else
-            echo "file_changed='false'" >> $GITHUB_OUTPUT
-          fi
-      
-  upload-artifact:
-    if: "${{ steps.set-update-variable.outputs.create-artifact }}" == "true"
-    steps:
       - name: Upload Artifact    
         uses: actions/upload-artifact@v4
         with:
           name: "${{ inputs.path }}${{ inputs.version }}_test.txt"
           path: "${{ inputs.path }}${{ inputs.version }}_test.txt"
 
-      
       # - name: Commit changes
       #   id: commit-changes
       #   env:

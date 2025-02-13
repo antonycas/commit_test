@@ -1,18 +1,27 @@
 name: Test Commit
 on: ['push']
 jobs:
-  commit:
-    name: commit
+  upload:
+    name: Upload
     permissions:
       contents: write 
     strategy:
       matrix:
         version: ["2", "3", "4"]
         path: ["ai/cache/"]
-    uses: ./.github/workflows/commit-flow.yml
+    uses: ./.github/workflows/upload.yml
     with:
       version: "${{ matrix.version }}"
       path: "${{ matrix.path }}"
+
+  commit:
+    name: Commit
+    needs: 
+      - upload
+    uses: ./.github/workflows/commit.yml
+    with:
+      path: "ai/cache/"
+      
 
     # steps:
     #   - name: checkout code
