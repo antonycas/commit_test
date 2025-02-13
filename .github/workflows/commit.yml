@@ -9,13 +9,14 @@ on:
         required: true
 jobs:
   commit:
-    - name: checkout code
-      uses: actions/checkout@v4
+    steps:
+      - name: checkout code
+        uses: actions/checkout@v4
 
-    - name: Download artifacts
-      path: ${{ inputs.path }}
-      pattern: "${{ inputs.path }}/*.json"
-      merge-multiple: true
+      - name: Download artifacts
+        path: ${{ inputs.path }}
+        pattern: "${{ inputs.path }}/*.json"
+        merge-multiple: true
 
-    - name: Display Git Status
-      run: git status
+      - name: Display Git Status
+        run: git status
