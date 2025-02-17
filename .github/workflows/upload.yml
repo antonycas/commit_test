@@ -31,7 +31,9 @@ jobs:
   #         else
   #           echo "file_changed='false'" >> $GITHUB_OUTPUT
   #         fi
-  upload-artifact:
+  update-file:
+    outputs:
+      file_changed: ${{ steps.set-file-changed.outputs.file-changed  }}
     runs-on: ubuntu-22.04
     name: Upload Artifact
     steps:
@@ -41,6 +43,23 @@ jobs:
       - name: Update File
         run: echo "Updated" >> "${{ inputs.path }}${{inputs.version}}_test.txt"
 
+      - name: Set File Changed Variable
+        id: set-file-changed
+        run: |
+          status=$(git status -s)
+          file="${{ inputs.path }}${{ inputs.version }}_test.txt"
+          
+          if grep -q "$file" <<< "$status"; then
+            echo "file-changed='true'" >> $GITHUB_OUTPUT
+          else
+            echo "file-changed='false'" >> $GITHUB_OUTPUT
+          fi
+
+  upload:
+    runs-on: ubuntu-22.04
+    needs: update-file
+    if: "${{ jobs.update-file.outputs.file-updated }}" == 'true'
+    steps:
       - name: Upload Artifact    
         uses: actions/upload-artifact@v4
         with:
