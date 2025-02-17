@@ -10,6 +10,8 @@ on:
 jobs:
   commit:
     runs-on: ubuntu-22.04
+    permissions:
+      contents: write 
     steps:
       - name: checkout code
         uses: actions/checkout@v4
@@ -26,8 +28,6 @@ jobs:
 
       - name: Commit Changes
         id: commit-changes
-        permissions:
-          contents: write 
         env:
           commit_message: Automatic Commit via Workflows
           commit_author: antonycas
