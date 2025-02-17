@@ -18,7 +18,7 @@ jobs:
         uses: actions/download-artifact@v4
         with:
           path: ${{ inputs.path }}
-          pattern: "${{ inputs.path }}/*.json"
+          pattern: "*_test.txt"
           merge-multiple: true
 
       - name: Display Git Status

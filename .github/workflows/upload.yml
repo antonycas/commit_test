@@ -44,7 +44,7 @@ jobs:
       - name: Upload Artifact    
         uses: actions/upload-artifact@v4
         with:
-          name: "${{ inputs.path }}${{ inputs.version }}_test.txt"
+          name: "${{ inputs.version }}_test.txt"
           path: "${{ inputs.path }}${{ inputs.version }}_test.txt"
 
       # - name: Commit changes
