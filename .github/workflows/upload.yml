@@ -56,9 +56,10 @@ jobs:
           fi
 
   upload:
+    name: Upload
     runs-on: ubuntu-22.04
     needs: update-file
-    if: "${{ jobs.update-file.outputs.file-updated }}" == 'true'
+    if: needs.update-file.outputs.file-updated == 'true'
     steps:
       - name: Upload Artifact    
         uses: actions/upload-artifact@v4
