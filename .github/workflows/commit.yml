@@ -21,9 +21,6 @@ jobs:
           pattern: "*_test.txt"
           merge-multiple: true
 
-      - name: Display Git Status
-        run: git status
-
       - name: Commit Changes
         id: commit-changes
         env:
