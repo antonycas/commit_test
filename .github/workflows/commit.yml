@@ -26,6 +26,8 @@ jobs:
 
       - name: Commit Changes
         id: commit-changes
+        permissions:
+          contents: write 
         env:
           commit_message: Automatic Commit via Workflows
           commit_author: antonycas

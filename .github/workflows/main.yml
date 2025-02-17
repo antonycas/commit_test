@@ -3,8 +3,6 @@ on: ['push']
 jobs:
   upload:
     name: Upload
-    # permissions:
-    #   contents: write 
     strategy:
       matrix:
         version: ["2", "3", "4"]
