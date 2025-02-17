@@ -21,6 +21,12 @@ jobs:
           pattern: "*_test.txt"
           merge-multiple: true
 
+      - name: Git Status
+        run: |
+          git status
+          echo "\n"
+          echo "${{ inputs.path }}"
+
       - name: Commit Changes
         id: commit-changes
         env:
@@ -29,7 +35,7 @@ jobs:
         run: |
           status=$(git status -s)
           file="${{ inputs.path }}${{ inputs.version }}_test.txt"
-          
+
           if grep -q "$file" <<< "$status"; then
             git config user.name "${{ env.commit_author }}"
             git config user.email "antonycas@users.noreply.github.com"
