@@ -23,3 +23,13 @@ jobs:
 
       - name: Display Git Status
         run: git status
+
+      - name: Commit Changes
+        id: commit-changes
+        env:
+          commit_message: Automatic Commit via Workflows
+          commit_author: antonycas
+        run: |
+          git add "${{ inputs.path }}"
+          git commit -m "${{ env.commit_message }}"
+          git push
